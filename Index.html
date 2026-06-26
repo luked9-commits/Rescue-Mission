@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Katoomba Rescue Frequency</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #0b0f14;
+      color: #d7e6ff;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #7ec8ff;
+    }
+
+    .clue {
+      display: none;
+      border: 1px solid #2c3e50;
+      padding: 15px;
+      margin-top: 15px;
+      background: #111a24;
+    }
+
+    input {
+      padding: 8px;
+      width: 60%;
+      margin-top: 10px;
+    }
+
+    button {
+      padding: 8px 12px;
+      margin-left: 5px;
+      cursor: pointer;
+      background: #1f3b57;
+      color: white;
+      border: none;
+    }
+
+    button:hover {
+      background: #2c5c88;
+    }
+
+    .success {
+      color: #7CFC00;
+    }
+
+    .error {
+      color: #ff6b6b;
+    }
+
+    #final {
+      display: none;
+      margin-top: 30px;
+      padding: 20px;
+      border: 2px solid #7ec8ff;
+    }
+
+    .codebox {
+      font-size: 24px;
+      letter-spacing: 4px;
+      color: #7CFC00;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>OPERATION: KATOOMBA RESCUE FREQUENCY</h1>
+
+<p>
+A field team is trapped near the Blue Mountains escarpment.
+Recover all 8 signal fragments to transmit the rescue frequency.
+</p>
+
+<!-- CLUE 1 -->
+<div id="clue1" class="clue" style="display:block;">
+  <h3>CLUE 1</h3>
+  <p>What is the valley on the southern side of the satellite image?</p>
+
+  <input id="a1" placeholder="answer">
+  <button onclick="check1()">Submit</button>
+  <p id="m1"></p>
+</div>
+
+<!-- CLUE 2 -->
+<div id="clue2" class="clue">
+  <h3>CLUE 2</h3>
+  <p>What is the grid reference of Point A?</p>
+
+  <input id="a2" placeholder="answer">
+  <button onclick="check2()">Submit</button>
+  <p id="m2"></p>
+</div>
+
+<!-- CLUE 3 -->
+<div id="clue3" class="clue">
+  <h3>CLUE 3</h3>
+  <p>What is the human feature at Point B?</p>
+
+  <input id="a3" placeholder="answer">
+  <button onclick="check3()">Submit</button>
+  <p id="m3"></p>
+</div>
+
+<!-- CLUE 4 -->
+<div id="clue4" class="clue">
+  <h3>CLUE 4</h3>
+  <p>What is the wind direction? (Northeast wind blowing southwest)</p>
+
+  <input id="a4" placeholder="answer">
+  <button onclick="check4()">Submit</button>
+  <p id="m4"></p>
+</div>
+
+<!-- CLUE 5 -->
+<div id="clue5" class="clue">
+  <h3>CLUE 5</h3>
+  <p>What is being burned?</p>
+  <p>Choose: Wentworth Falls Cemetery OR Denis Kevans Bushland Gardens</p>
+
+  <input id="a5" placeholder="answer">
+  <button onclick="check5()">Submit</button>
+  <p id="m5"></p>
+</div>
+
+<!-- CLUE 6 -->
+<div id="clue6" class="clue">
+  <h3>CLUE 6</h3>
+  <p>Average winter precipitation?</p>
+
+  <input id="a6" placeholder="mm">
+  <button onclick="check6()">Submit</button>
+  <p id="m6"></p>
+</div>
+
+<!-- CLUE 7 -->
+<div id="clue7" class="clue">
+  <h3>CLUE 7</h3>
+  <p>Average altitude?</p>
+
+  <input id="a7" placeholder="m">
+  <button onclick="check7()">Submit</button>
+  <p id="m7"></p>
+</div>
+
+<!-- CLUE 8 -->
+<div id="clue8" class="clue">
+  <h3>CLUE 8</h3>
+  <p>Highest recorded average temperature?</p>
+
+  <input id="a8" placeholder="°C">
+  <button onclick="check8()">Submit</button>
+  <p id="m8"></p>
+</div>
+
+<!-- FINAL -->
+<div id="final">
+  <h2>ALL SIGNAL FRAGMENTS COLLECTED</h2>
+
+  <p>Rescue frequency code:</p>
+  <div id="code" class="codebox"></div>
+
+  <p id="finalmsg"></p>
+</div>
+
+<script>
+let code = [];
+
+function next(current, next) {
+  document.getElementById(current).style.display = "none";
+  document.getElementById(next).style.display = "block";
+}
+
+/* CLUE 1 */
+function check1() {
+  let a = document.getElementById("a1").value.trim().toLowerCase();
+
+  if (a === "jamison valley") {
+    document.getElementById("m1").innerHTML = "✔ Signal fragment: 4";
+    code.push("4");
+    next("clue1","clue2");
+  } else {
+    document.getElementById("m1").innerHTML = "✖ Incorrect - recheck valley name";
+  }
+}
+
+/* CLUE 2 */
+function check2() {
+  let a = document.getElementById("a2").value.trim();
+
+  if (a === "534638") {
+    document.getElementById("m2").innerHTML = "✔ Signal fragment: 3";
+    code.push("3");
+    next("clue2","clue3");
+  } else {
+    document.getElementById("m2").innerHTML = "✖ Incorrect grid reference";
+  }
+}
+
+/* CLUE 3 */
+function check3() {
+  let a = document.getElementById("a3").value.trim().toLowerCase();
+
+  if (a === "peter carroll field") {
+    document.getElementById("m3").innerHTML = "✔ Signal fragment: 7";
+    code.push("7");
+    next("clue3","clue4");
+  } else {
+    document.getElementById("m3").innerHTML = "✖ Check human feature";
+  }
+}
+
+/* CLUE 4 */
+function check4() {
+  let a = document.getElementById("a4").value.trim().toLowerCase();
+
+  if (a.includes("south") && a.includes("west")) {
+    document.getElementById("m4").innerHTML = "✔ Signal fragment: 1";
+    code.push("1");
+    next("clue4","clue5");
+  } else {
+    document.getElementById("m4").innerHTML = "✖ Recheck wind direction";
+  }
+}
+
+/* CLUE 5 */
+function check5() {
+  let a = document.getElementById("a5").value.trim().toLowerCase();
+
+  if (a.includes("denis")) {
+    document.getElementById("m5").innerHTML = "✔ Signal fragment: 9";
+    code.push("9");
+    next("clue5","clue6");
+  } else {
+    document.getElementById("m5").innerHTML = "✖ Incorrect location";
+  }
+}
+
+/* CLUE 6 */
+function check6() {
+  let a = document.getElementById("a6").value.trim();
+
+  if (a === "158") {
+    document.getElementById("m6").innerHTML = "✔ Signal fragment: 2";
+    code.push("2");
+    next("clue6","clue7");
+  } else {
+    document.getElementById("m6").innerHTML = "✖ Check climate graph";
+  }
+}
+
+/* CLUE 7 */
+function check7() {
+  let a = document.getElementById("a7").value.trim();
+
+  if (a === "1020") {
+    document.getElementById("m7").innerHTML = "✔ Signal fragment: 6";
+    code.push("6");
+    next("clue7","clue8");
+  } else {
+    document.getElementById("m7").innerHTML = "✖ Check elevation data";
+  }
+}
+
+/* CLUE 8 */
+function check8() {
+  let a = document.getElementById("a8").value.trim();
+
+  if (a === "25.7") {
+    document.getElementById("m8").innerHTML = "✔ Signal fragment: 5";
+    code.push("5");
+
+    document.getElementById("clue8").style.display = "none";
+    document.getElementById("final").style.display = "block";
+
+    document.getElementById("code").innerText = code.join("");
+
+    document.getElementById("finalmsg").innerHTML =
+      "Transmit this frequency to initiate rescue operations.";
+  } else {
+    document.getElementById("m8").innerHTML = "✖ Check temperature data";
+  }
+}
+</script>
+
+</body>
+</html>
